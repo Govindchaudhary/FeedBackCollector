@@ -6,7 +6,8 @@ const keys = require('../config/keys');
 const User = mongoose.model('users');
 
 passport.serializeUser((user,done)=>{
-    done(null,user.id);
+    done(null,user.id);  //telling passport that we are done with extracting userid from user info
+                          //and now it should resume auth process 
 });
 
  passport.deserializeUser(async(id,done)=> {
@@ -26,11 +27,11 @@ passport.use(new GoogleStrategy({
 },async(accessToken,refreshToken,profile,done)=> {
    const existingUser = await User.findOne({googleId:profile.id});
         if(existingUser) {
-            done(null,existingUser);
+            done(null,existingUser); //tells passport hey we are done we found the user now it should resume process
         }
         else{
            const user = await new User({googleId:profile.id}).save();
-            done(null,user);
+            done(null,user);//we are finished with creating user now it should resume the process
         }
     }
 ));
