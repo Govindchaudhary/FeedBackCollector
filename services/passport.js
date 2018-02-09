@@ -15,6 +15,9 @@ passport.serializeUser((user,done)=>{
   });
 
 
+/*
+ we got the user details from google then 2nd argument is called to create new record in database with this info
+*/
 passport.use(new GoogleStrategy({
     clientID:keys.googleClientID,
     clientSecret:keys.googleClientSecret,
