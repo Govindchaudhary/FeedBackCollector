@@ -27,5 +27,18 @@ app.use(passport.session());
 
 authRoutes(app);
 billingRoutes(app);
+
+if (process.env.NODE_ENV==='production') {
+    //express will serve up production assets
+    //like our main.js or main.css
+    //if request does not matches to our specified routes on server then look into client/build
+    app.use(express.static('client/build'));
+
+    //if route still does not match then return index.html inside client/build
+    const path = require('path');
+    app.get('*',(req,res)=> {
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    });
+}
 const PORT = process.env.PORT || 5000 ;
 app.listen(PORT); 
