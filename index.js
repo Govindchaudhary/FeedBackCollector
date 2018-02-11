@@ -5,12 +5,14 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 require('./models/user');
+require('./models/survey');
 require('./services/passport');
 
 
 mongoose.connect(keys.mongoURI);
 const authRoutes = require('./routes/authRoutes');
 const billingRoutes = require('./routes/billingRoutes');
+const surveyRoutes = require('./routes/surveyRoutes');
 const app = express();
 
 //whenever a post/put/pet request comes into application this middleware parse the request body and assign to req.body pty of request.
