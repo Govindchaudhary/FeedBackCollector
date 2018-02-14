@@ -14,4 +14,13 @@ export const  handleToken = (token)=>{
     dispatch({type:'FETCH_USER',payload:res.data});
   }
 
+};
+
+export const submitSurvey = (values) => {
+  return async (dispatch)=> {
+    //backend server sends back user with updated nuber of credits
+    const res = await axios.post('/api/surveys',values);
+    dispatch({type:'FETCH_USER',payload:res.data});
+  }
+
 }
