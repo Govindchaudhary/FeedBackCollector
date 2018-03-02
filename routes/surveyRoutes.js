@@ -23,6 +23,7 @@ module.exports = (app) => {
 
     app.post('/api/surveys/webhooks',(req,res)=>{
       const p = new Path('/api/surveys/:surveyId/:choice');
+      console.log(req.body);
 
     //iterate through the req.body apply map and then remove undefined using comapct and then remove duplicates by uniq.
     //and finally for each survey find corresponding survey in database and update it.
