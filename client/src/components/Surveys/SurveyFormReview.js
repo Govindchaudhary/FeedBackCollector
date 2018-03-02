@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import _ from 'lodash';
 import formFields from './formFields';
 import * as actions from '../../actions';
@@ -26,7 +27,7 @@ const SurveyFormReview = (props) => {
            </button>
            <button
             className="green btn-flat right white-text"
-            onClick= {()=> props.submitSurvey(props.formValues)}>
+            onClick= {()=> props.submitSurvey(props.formValues,props.history)}>
             Send Survey
             
             <i className="material-icons right ">email</i>
@@ -41,4 +42,4 @@ const mapStateToProps = (store)=> {
         formValues:store.form.surveyForm.values
     });
 }
-export default connect(mapStateToProps,actions)(SurveyFormReview);
+export default connect(mapStateToProps,actions)(withRouter(SurveyFormReview));

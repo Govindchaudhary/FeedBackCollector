@@ -16,11 +16,19 @@ export const  handleToken = (token)=>{
 
 };
 
-export const submitSurvey = (values) => {
+export const submitSurvey = (values,history) => {
   return async (dispatch)=> {
     //backend server sends back user with updated nuber of credits
     const res = await axios.post('/api/surveys',values);
+    history.push('/surveys');
     dispatch({type:'FETCH_USER',payload:res.data});
   }
+
+};
+export const fetchSurveys = ()=> async dispatch => {
+  const res = await axios.get('/api/surveys');
+  dispatch({type:'FETCH_SURVEYS',payload:res.data});
+
+
 
 }
