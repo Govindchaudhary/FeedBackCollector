@@ -1,4 +1,4 @@
-const authReducer =(state=null,action) => {
+export const authReducer =(state=null,action) => {
     console.log(action);
     switch(action.type) {
         case 'FETCH_USER':
@@ -8,4 +8,3 @@ const authReducer =(state=null,action) => {
           return state;
     }
 };
-export default authReducer;
