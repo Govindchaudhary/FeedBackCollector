@@ -25,12 +25,14 @@ passport.use(new GoogleStrategy({
     callbackURL:'/auth/google/callback',
     proxy:true
 },async(accessToken,refreshToken,profile,done)=> {
+    
    const existingUser = await User.findOne({googleId:profile.id});
         if(existingUser) {
             done(null,existingUser); //tells passport hey we are done we found the user now it should resume process
         }
         else{
-           const user = await new User({googleId:profile.id}).save();
+           const user = await new User({userName:profile._json.displayName,profile:profile._json.image.url,googleId:profile.id}).save();
+           
             done(null,user);//we are finished with creating user now it should resume the process
         }
     }
